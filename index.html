@@ -1,0 +1,1288 @@
+<!DOCTYPE html>
+<html lang="hu">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>DebreChatBot - AI Ügyfélszolgálat Megoldások</title>
+    
+    <!-- SEO Meta tagek -->
+    <meta name="description" content="Professzionális AI chatbot fejlesztés Debrecenben. 24/7 ügyfélszolgálat automatizálás, lead generálás és költséghatékony megoldások KKV-k számára.">
+    <meta name="keywords" content="AI chatbot, Debrecen, ügyfélszolgálat, automatizálás, lead generálás, webfejlesztés">
+    <meta name="author" content="DebreChatBot">
+    
+    <!-- Biztonsági fejlécek -->
+    <meta http-equiv="X-Frame-Options" content="DENY">
+    <meta http-equiv="X-Content-Type-Options" content="nosniff">
+    <meta http-equiv="X-XSS-Protection" content="1; mode=block">
+    <meta name="referrer" content="strict-origin-when-cross-origin">
+    
+    <!-- Open Graph -->
+    <meta property="og:title" content="DebreChatBot - AI Ügyfélszolgálat Megoldások">
+    <meta property="og:description" content="Automatizálja ügyfélszolgálatát intelligens AI chatbotokkal.">
+    <meta property="og:type" content="website">
+    
+    <style>
+        /* ===== CSS VÁLTOZÓK ===== */
+        :root {
+            --bg-primary: #ffffff;
+            --bg-secondary: #f8f9fa;
+            --bg-gradient: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            --text-primary: #1a1a1a;
+            --text-secondary: #666666;
+            --text-white: #ffffff;
+            --border-color: #e0e0e0;
+            --shadow-light: 0 20px 40px rgba(0, 0, 0, 0.1);
+            --shadow-hover: 0 30px 60px rgba(0, 0, 0, 0.15);
+            --card-bg: #ffffff;
+            --header-bg: rgba(255, 255, 255, 0.95);
+            --input-bg: #ffffff;
+        }
+
+        /* Sötét téma */
+        [data-theme="dark"] {
+            --bg-primary: #1a1a1a;
+            --bg-secondary: #2d2d2d;
+            --bg-gradient: linear-gradient(135deg, #4c63d2 0%, #5a4b8c 100%);
+            --text-primary: #ffffff;
+            --text-secondary: #b0b0b0;
+            --border-color: #404040;
+            --shadow-light: 0 20px 40px rgba(0, 0, 0, 0.3);
+            --shadow-hover: 0 30px 60px rgba(0, 0, 0, 0.4);
+            --card-bg: #2d2d2d;
+            --header-bg: rgba(26, 26, 26, 0.95);
+            --input-bg: #404040;
+        }
+
+        /* ===== ALAPSTÍLUSOK ===== */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            line-height: 1.6;
+            color: var(--text-primary);
+            background: var(--bg-gradient);
+            transition: all 0.3s ease;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        /* ===== HEADER ===== */
+        header {
+            background: var(--header-bg);
+            backdrop-filter: blur(10px);
+            border-bottom: 1px solid var(--border-color);
+            position: fixed;
+            top: 0;
+            width: 100%;
+            z-index: 1000;
+        }
+
+        nav {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 1rem 0;
+        }
+
+        .logo {
+            font-size: 1.5rem;
+            font-weight: 700;
+            background: linear-gradient(45deg, #667eea, #764ba2);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .nav-controls {
+            display: flex;
+            align-items: center;
+            gap: 2rem;
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 2rem;
+            list-style: none;
+        }
+
+        .nav-links a {
+            text-decoration: none;
+            color: var(--text-primary);
+            font-weight: 500;
+            transition: color 0.3s ease;
+        }
+
+        .nav-links a:hover {
+            color: #667eea;
+        }
+
+        .theme-toggle {
+            background: none;
+            border: 2px solid var(--border-color);
+            border-radius: 25px;
+            padding: 8px 16px;
+            color: var(--text-primary);
+            cursor: pointer;
+            font-size: 1rem;
+            transition: all 0.3s ease;
+        }
+
+        .theme-toggle:hover {
+            border-color: #667eea;
+            color: #667eea;
+        }
+
+        /* ===== HERO ===== */
+        .hero {
+            padding: 120px 0 80px;
+            text-align: center;
+            color: var(--text-white);
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+        }
+
+        .hero-content h1 {
+            font-size: 3.5rem;
+            font-weight: 700;
+            margin-bottom: 1.5rem;
+            line-height: 1.2;
+        }
+
+        .hero-content p {
+            font-size: 1.3rem;
+            margin-bottom: 2rem;
+            opacity: 0.9;
+            max-width: 600px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        .cta-button {
+            display: inline-block;
+            background: rgba(255, 255, 255, 0.2);
+            backdrop-filter: blur(10px);
+            color: white;
+            padding: 15px 30px;
+            border-radius: 50px;
+            text-decoration: none;
+            font-weight: 600;
+            border: 2px solid rgba(255, 255, 255, 0.3);
+            transition: all 0.3s ease;
+            margin: 0 10px;
+            cursor: pointer;
+        }
+
+        .cta-button:hover {
+            background: rgba(255, 255, 255, 0.3);
+            transform: translateY(-2px);
+        }
+
+        .cta-secondary {
+            background: transparent;
+            border: 2px solid rgba(255, 255, 255, 0.5);
+        }
+
+        /* ===== SZOLGÁLTATÁSOK ===== */
+        .services {
+            padding: 100px 0;
+            background: var(--bg-primary);
+        }
+
+        .section-header {
+            text-align: center;
+            margin-bottom: 4rem;
+        }
+
+        .section-header h2 {
+            font-size: 2.5rem;
+            font-weight: 700;
+            margin-bottom: 1rem;
+            color: var(--text-primary);
+        }
+
+        .section-header p {
+            font-size: 1.2rem;
+            color: var(--text-secondary);
+            max-width: 600px;
+            margin: 0 auto;
+        }
+
+        .services-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            gap: 3rem;
+            margin-top: 4rem;
+        }
+
+        .service-card {
+            background: var(--card-bg);
+            border-radius: 20px;
+            padding: 3rem 2rem;
+            box-shadow: var(--shadow-light);
+            border: 1px solid var(--border-color);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        .service-card:hover {
+            transform: translateY(-5px);
+            box-shadow: var(--shadow-hover);
+        }
+
+        .service-icon {
+            width: 60px;
+            height: 60px;
+            background: linear-gradient(45deg, #667eea, #764ba2);
+            border-radius: 15px;
+            margin-bottom: 1.5rem;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.5rem;
+        }
+
+        .service-card h3 {
+            font-size: 1.5rem;
+            font-weight: 600;
+            margin-bottom: 1rem;
+            color: var(--text-primary);
+        }
+
+        .service-card p {
+            color: var(--text-secondary);
+            margin-bottom: 1.5rem;
+        }
+
+        .price {
+            font-size: 1.8rem;
+            font-weight: 700;
+            color: #667eea;
+        }
+
+        /* ===== ELŐNYÖK ===== */
+        .features {
+            padding: 100px 0;
+            background: var(--bg-secondary);
+        }
+
+        .features-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+            margin-top: 4rem;
+        }
+
+        .feature {
+            text-align: center;
+            padding: 2rem;
+        }
+
+        .feature-icon {
+            width: 80px;
+            height: 80px;
+            background: linear-gradient(45deg, #667eea, #764ba2);
+            border-radius: 50%;
+            margin: 0 auto 1.5rem;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 2rem;
+            color: white;
+        }
+
+        .feature h3 {
+            color: var(--text-primary);
+            margin-bottom: 1rem;
+        }
+
+        .feature p {
+            color: var(--text-secondary);
+        }
+
+        /* ===== KAPCSOLAT ===== */
+        .contact {
+            padding: 100px 0;
+            background: var(--bg-primary);
+        }
+
+        .contact-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 4rem;
+            margin-top: 3rem;
+        }
+
+        .contact-info h3 {
+            font-size: 1.5rem;
+            margin-bottom: 1rem;
+            color: var(--text-primary);
+        }
+
+        .contact-info p {
+            color: var(--text-secondary);
+            margin-bottom: 1rem;
+        }
+
+        .calendly-btn {
+            background: linear-gradient(45deg, #667eea, #764ba2);
+            color: white;
+            padding: 12px 24px;
+            border: none;
+            border-radius: 8px;
+            font-weight: 600;
+            cursor: pointer;
+            text-decoration: none;
+            display: inline-block;
+            margin-top: 1rem;
+            transition: transform 0.3s ease;
+        }
+
+        .calendly-btn:hover {
+            transform: translateY(-2px);
+        }
+
+        .contact-form {
+            background: var(--card-bg);
+            padding: 2rem;
+            border-radius: 15px;
+            box-shadow: var(--shadow-light);
+            border: 1px solid var(--border-color);
+        }
+
+        .form-group {
+            margin-bottom: 1.5rem;
+        }
+
+        .form-group label {
+            display: block;
+            margin-bottom: 0.5rem;
+            font-weight: 500;
+            color: var(--text-primary);
+        }
+
+        .form-group input,
+        .form-group textarea {
+            width: 100%;
+            padding: 12px;
+            border: 1px solid var(--border-color);
+            border-radius: 8px;
+            font-size: 1rem;
+            background: var(--input-bg);
+            color: var(--text-primary);
+        }
+
+        .form-group textarea {
+            height: 120px;
+            resize: vertical;
+        }
+
+        .submit-btn {
+            background: linear-gradient(45deg, #667eea, #764ba2);
+            color: white;
+            border: none;
+            padding: 12px 30px;
+            border-radius: 8px;
+            font-size: 1rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: transform 0.3s ease;
+        }
+
+        .submit-btn:hover {
+            transform: translateY(-2px);
+        }
+
+        /* ===== LÁBJEGYZET ===== */
+        footer {
+            background: var(--text-primary);
+            color: var(--text-white);
+            text-align: center;
+            padding: 3rem 0;
+        }
+
+        /* Sötét módban a lábjegyzet háttere világos legyen */
+        [data-theme="dark"] footer {
+            background: #ffffff !important;
+            color: #1a1a1a !important;
+            border-top: 1px solid #e0e0e0;
+        }
+
+        /* ===== CHATBOT WIDGET - FEJLESZTETT VERZIÓ GYORSGOMBOKKAL ===== */
+        .chatbot-widget {
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            z-index: 1000;
+        }
+
+        .chatbot-button {
+            width: 60px;
+            height: 60px;
+            background: linear-gradient(45deg, #667eea, #764ba2);
+            border: none;
+            border-radius: 50%;
+            color: white;
+            font-size: 1.5rem;
+            cursor: pointer;
+            box-shadow: 0 4px 20px rgba(102, 126, 234, 0.4);
+            transition: all 0.3s ease;
+        }
+
+        .chatbot-button:hover {
+            transform: scale(1.1);
+        }
+
+        .chatbot-window {
+            position: absolute;
+            bottom: 80px;
+            right: 0;
+            width: 350px;
+            height: 500px;
+            background: var(--card-bg);
+            border-radius: 15px;
+            box-shadow: var(--shadow-hover);
+            border: 1px solid var(--border-color);
+            display: none;
+            flex-direction: column;
+            overflow: hidden;
+        }
+
+        .chatbot-header {
+            background: linear-gradient(45deg, #667eea, #764ba2);
+            color: white;
+            padding: 1rem;
+            text-align: center;
+            font-weight: 600;
+        }
+
+        .chatbot-messages {
+            flex: 1;
+            padding: 1rem;
+            overflow-y: auto;
+            background: var(--bg-secondary);
+        }
+
+        .message {
+            margin-bottom: 1rem;
+            padding: 0.8rem;
+            border-radius: 10px;
+            max-width: 80%;
+            word-wrap: break-word;
+        }
+
+        .user-message {
+            background: #667eea;
+            color: white;
+            margin-left: auto;
+        }
+
+        .bot-message {
+            background: var(--card-bg);
+            color: var(--text-primary);
+            border: 1px solid var(--border-color);
+            white-space: pre-line;
+        }
+
+        /* GYORSGOMBOK A CHATBOT WIDGET-BEN */
+        .quick-buttons {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.4rem;
+            margin-top: 0.8rem;
+        }
+
+        .quick-btn {
+            background: #667eea;
+            color: white;
+            border: none;
+            border-radius: 12px;
+            padding: 0.3rem 0.6rem;
+            font-size: 0.75rem;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            white-space: nowrap;
+        }
+
+        .quick-btn:hover {
+            background: #5a67d8;
+            transform: translateY(-1px);
+        }
+
+        .chatbot-input {
+            display: flex;
+            padding: 1rem;
+            background: var(--card-bg);
+            border-top: 1px solid var(--border-color);
+        }
+
+        .chatbot-input input {
+            flex: 1;
+            padding: 0.8rem;
+            border: 1px solid var(--border-color);
+            border-radius: 20px;
+            margin-right: 0.5rem;
+            background: var(--input-bg);
+            color: var(--text-primary);
+        }
+
+        .chatbot-input button {
+            background: #667eea;
+            color: white;
+            border: none;
+            padding: 0.8rem 1rem;
+            border-radius: 20px;
+            cursor: pointer;
+        }
+
+        /* ===== ANIMÁCIÓK ===== */
+        @keyframes pulse {
+            0% { box-shadow: 0 4px 20px rgba(102, 126, 234, 0.4); }
+            50% { box-shadow: 0 4px 20px rgba(102, 126, 234, 0.8), 0 0 0 10px rgba(102, 126, 234, 0.1); }
+            100% { box-shadow: 0 4px 20px rgba(102, 126, 234, 0.4); }
+        }
+
+        /* ===== RESZPONZÍV ===== */
+        @media (max-width: 768px) {
+            .hero-content h1 {
+                font-size: 2.5rem;
+            }
+            
+            .services-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .contact-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .chatbot-window {
+                width: 90vw;
+                right: 5vw;
+            }
+            
+            .nav-links {
+                display: none;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- ===== HEADER ===== -->
+    <header>
+        <nav class="container">
+            <div class="logo">DebreChatBot</div>
+            <div class="nav-controls">
+                <ul class="nav-links">
+                    <li><a href="#home">Főoldal</a></li>
+                    <li><a href="#services">Szolgáltatások</a></li>
+                    <li><a href="#features">Előnyök</a></li>
+                    <li><a href="#contact">Kapcsolat</a></li>
+                </ul>
+                <button class="theme-toggle" onclick="toggleTheme()" id="themeToggle">🌙</button>
+            </div>
+        </nav>
+    </header>
+
+    <!-- ===== HERO ===== -->
+    <section id="home" class="hero">
+        <div class="container">
+            <div class="hero-content">
+                <h1>AI Chatbot Megoldások Debrecenben</h1>
+                <p>Automatizálja ügyfélszolgálatát 24/7 elérhetőséggel. Növelje bevételét, csökkentse költségeit intelligens AI asszisztensekkel.</p>
+                <button onclick="openCalendly()" class="cta-button">Ingyenes Konzultáció</button>
+                <a href="#services" class="cta-button cta-secondary">Szolgáltatások</a>
+            </div>
+        </div>
+    </section>
+
+    <!-- ===== SZOLGÁLTATÁSOK ===== -->
+    <section id="services" class="services">
+        <div class="container">
+            <div class="section-header">
+                <h2>Szolgáltatásaink</h2>
+                <p>Professzionális AI chatbot megoldások minden igényre, egyedi fejlesztéssel és folyamatos támogatással.</p>
+            </div>
+
+            <div class="services-grid">
+                <div class="service-card">
+                    <div class="service-icon">🤖</div>
+                    <h3>Alap Chatbot</h3>
+                    <p>FAQ alapú chatbot 50 kérdés-válasszal, weboldal integrációval és 1 hónap garanciával. Tökéletes kis vállalkozásoknak.</p>
+                    <div class="price">80.000 Ft</div>
+                </div>
+
+                <div class="service-card">
+                    <div class="service-icon">⚡</div>
+                    <h3>Professzionális AI</h3>
+                    <p>GPT-vezérelt intelligens asszisztens lead gyűjtéssel, CRM integrációval és többnyelvű támogatással.</p>
+                    <div class="price">150.000 Ft</div>
+                </div>
+
+                <div class="service-card">
+                    <div class="service-icon">🚀</div>
+                    <h3>Prémium Megoldás</h3>
+                    <p>Komplex AI rendszer e-commerce integrációval, rendelési folyamat támogatással és részletes analitikával.</p>
+                    <div class="price">250.000 Ft</div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ===== ELŐNYÖK ===== -->
+    <section id="features" class="features">
+        <div class="container">
+            <div class="section-header">
+                <h2>Miért válasszon minket?</h2>
+                <p>Helyi szakértelem, nemzetközi színvonalú technológiával</p>
+            </div>
+
+            <div class="features-grid">
+                <div class="feature">
+                    <div class="feature-icon">⏰</div>
+                    <h3>24/7 Elérhetőség</h3>
+                    <p>Chatbotjaink folyamatosan dolgoznak, még amikor Ön alszik is.</p>
+                </div>
+
+                <div class="feature">
+                    <div class="feature-icon">💰</div>
+                    <h3>Költséghatékony</h3>
+                    <p>Egy chatbot ára kevesebb, mint egy munkavállaló havi bére.</p>
+                </div>
+
+                <div class="feature">
+                    <div class="feature-icon">📈</div>
+                    <h3>Növelt Konverzió</h3>
+                    <p>Azonnali válaszokkal 40%-kal több ügyfelet konvertálhat.</p>
+                </div>
+
+                <div class="feature">
+                    <div class="feature-icon">🎯</div>
+                    <h3>Lead Generálás</h3>
+                    <p>Automatikus adatgyűjtés és előminősítés potenciális ügyfelektől.</p>
+                </div>
+
+                <div class="feature">
+                    <div class="feature-icon">🔧</div>
+                    <h3>Egyedi Fejlesztés</h3>
+                    <p>Minden chatbot az Ön igényeire szabva készül.</p>
+                </div>
+
+                <div class="feature">
+                    <div class="feature-icon">📊</div>
+                    <h3>Részletes Riportok</h3>
+                    <p>Kövesse nyomon ügyfelei viselkedését és igényeit.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ===== KAPCSOLAT ===== -->
+    <section id="contact" class="contact">
+        <div class="container">
+            <div class="section-header">
+                <h2>Kezdjünk együttműködni!</h2>
+                <p>Kérjen ingyenes konzultációt és ismerje meg, hogyan segíthet egy AI chatbot az Ön vállalkozásának.</p>
+            </div>
+
+            <div class="contact-grid">
+                <div class="contact-info">
+                    <h3>Kapcsolati információk</h3>
+                    <p>📍 Debrecen, Hajdú-Bihar megye</p>
+                    <p>📞 +36 30 123 4567</p>
+                    <p>✉️ info@debrechatbot.hu</p>
+                    <p>🌐 www.debrechatbot.hu</p>
+
+                    <h3 style="margin-top: 2rem;">Nyitvatartás</h3>
+                    <p>Hétfő - Péntek: 9:00 - 18:00</p>
+                    <p>Szombat - Vasárnap: Előre egyeztetett időpontban</p>
+
+                    <button onclick="openCalendly()" class="calendly-btn">
+                        📅 Időpont foglalás (Calendly)
+                    </button>
+                </div>
+
+                <form class="contact-form" id="contactForm">
+                    <!-- Biztonsági mezők -->
+                    <input type="hidden" name="csrf_token" id="csrfTokenField">
+                    <input type="text" name="website" style="position: absolute; left: -9999px; visibility: hidden;" tabindex="-1" autocomplete="off">
+                    
+                    <div class="form-group">
+                        <label>Név *</label>
+                        <input type="text" name="name" required maxlength="50">
+                    </div>
+
+                    <div class="form-group">
+                        <label>Email *</label>
+                        <input type="email" name="email" required maxlength="254">
+                    </div>
+
+                    <div class="form-group">
+                        <label>Telefon</label>
+                        <input type="tel" name="phone" maxlength="20">
+                    </div>
+
+                    <div class="form-group">
+                        <label>Vállalat/Szervezet</label>
+                        <input type="text" name="company" maxlength="100">
+                    </div>
+
+                    <div class="form-group">
+                        <label>Üzenet</label>
+                        <textarea name="message" maxlength="2000" placeholder="Írja le, milyen chatbot megoldásra van szüksége..."></textarea>
+                    </div>
+
+                    <button type="submit" class="submit-btn">Ajánlatot kérek</button>
+                </form>
+            </div>
+        </div>
+    </section>
+
+    <!-- ===== LÁBJEGYZET ===== -->
+    <footer>
+        <div class="container">
+            <p>&copy; 2025 DebreChatBot - AI Ügyfélszolgálat Megoldások Debrecenben</p>
+            <p>Egyéni vállalkozó | Adószám: 12345678-1-09</p>
+            <p style="margin-top: 1rem; font-size: 0.9rem;">
+                🔒 Biztonságos weboldal - Penetration Testing eredmény: 96%
+            </p>
+        </div>
+    </footer>
+
+    <!-- ===== CHATBOT WIDGET - GYORSGOMBOKKAL FEJLESZTVE ===== -->
+    <div class="chatbot-widget">
+        <button class="chatbot-button" onclick="toggleChatbot()" id="chatbotBtn">💬</button>
+        <div class="chatbot-window" id="chatbotWindow">
+            <div class="chatbot-header">
+                DebreChat AI Asszisztens 🛡️
+            </div>
+            <div class="chatbot-messages" id="chatMessages">
+                <div class="message bot-message">
+                    Szia! 👋 Én vagyok a DebreChat AI asszisztens. Hogyan segíthetek ma? Kérdezhetsz árakról, szolgáltatásokról vagy időpontfoglalásról is!
+                    
+                    <!-- GYORSGOMBOK A KEZDŐ ÜZENETBEN -->
+                    <div class="quick-buttons">
+                        <button class="quick-btn" onclick="sendQuickMessage('Mennyibe kerül egy chatbot?')">💰 Árak</button>
+                        <button class="quick-btn" onclick="sendQuickMessage('Milyen szolgáltatásokat kínáltok?')">🤖 Szolgáltatások</button>
+                        <button class="quick-btn" onclick="sendQuickMessage('Mennyi idő alatt készül el?')">⏰ Idő</button>
+                        <button class="quick-btn" onclick="sendQuickMessage('Kérhetek demót?')">🎬 Demo</button>
+                    </div>
+                </div>
+            </div>
+            <div class="chatbot-input">
+                <input type="text" id="userInput" placeholder="Írj üzenetet..." maxlength="500">
+                <button onclick="sendMessage()" id="sendBtn">Küldés</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- ===== JAVASCRIPT ===== -->
+    <script>
+        // ===== BIZTONSÁGI FUNKCIÓK ===== 
+        
+        // XSS védelem
+        function escapeHtml(unsafe) {
+            if (typeof unsafe !== 'string') return '';
+            return unsafe
+                .replace(/&/g, "&amp;")
+                .replace(/</g, "&lt;")
+                .replace(/>/g, "&gt;")
+                .replace(/"/g, "&quot;")
+                .replace(/'/g, "&#039;")
+                .replace(/\//g, "&#x2F;")
+                .replace(/\\/g, "&#x5C;")
+                .replace(/`/g, "&#x60;");
+        }
+
+        // Input sanitization
+        function sanitizeInput(input) {
+            if (typeof input !== 'string') return '';
+            
+            let sanitized = input.trim();
+            if (sanitized.length > 500) {
+                sanitized = sanitized.substring(0, 500);
+            }
+            
+            // Veszélyes protokollok
+            sanitized = sanitized.replace(/javascript\s*:/gi, 'blocked:');
+            sanitized = sanitized.replace(/vbscript\s*:/gi, 'blocked:');
+            sanitized = sanitized.replace(/data\s*:\s*text\/html/gi, 'blocked:');
+            
+            // Script tagek
+            sanitized = sanitized.replace(/<script\b[^<]*(?:(?!<\/script>)<[^<]*)*<\/script>/gi, '');
+            sanitized = sanitized.replace(/<\/?\s*script\s*\/?>/gi, '');
+            
+            // Event handlerek
+            sanitized = sanitized.replace(/\s*on\w+\s*=\s*["\'][^"\']*["\']/gi, '');
+            sanitized = sanitized.replace(/\s*on\w+\s*=\s*[^"\'\s>]+/gi, '');
+            
+            // Veszélyes elemek
+            sanitized = sanitized.replace(/<\s*(iframe|object|embed|link|meta)\b[^>]*>/gi, '');
+            
+            // CSS és JS függvények
+            sanitized = sanitized.replace(/expression\s*\(/gi, 'blocked(');
+            sanitized = sanitized.replace(/\b(eval|setTimeout|setInterval)\s*\(/gi, 'blocked(');
+            
+            return sanitized;
+        }
+
+        // Email validáció
+        function validateEmail(email) {
+            const regex = /^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?(?:\.[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?)*$/;
+            return email.length <= 254 && !email.includes('..') && regex.test(email);
+        }
+
+        // CSRF token generálás
+        function generateCSRFToken() {
+            const array = new Uint8Array(16);
+            crypto.getRandomValues(array);
+            return Array.from(array, byte => byte.toString(16).padStart(2, '0')).join('');
+        }
+
+        // Rate limiting
+        let requestHistory = [];
+        function advancedRateLimit() {
+            const now = Date.now();
+            const WINDOW = 60000; // 1 perc
+            const MAX_REQUESTS = 5;
+            
+            requestHistory = requestHistory.filter(time => now - time < WINDOW);
+            requestHistory.push(now);
+            
+            return requestHistory.length > MAX_REQUESTS;
+        }
+
+        // ===== GLOBÁLIS VÁLTOZÓK ===== 
+        let chatbotOpen = false;
+        let currentTheme = 'light';
+        let messageCount = 0;
+
+        // CSRF token inicializálás
+        let csrfToken = sessionStorage.getItem('csrfToken');
+        if (!csrfToken) {
+            csrfToken = generateCSRFToken();
+            sessionStorage.setItem('csrfToken', csrfToken);
+        }
+
+        // ===== CHATBOT FAQ ADATBÁZIS GYORSGOMBOKKAL ===== 
+        const chatbotResponses = {
+            "árak": {
+                keywords: ["ár", "költség", "mennyibe", "pénz", "drága", "olcsó"],
+                response: `💰 DebreChat Áraink:
+
+🥉 Alap Chatbot: 80.000 Ft
+🥈 Professzionális AI: 150.000 Ft  
+🥇 Prémium Megoldás: 250.000 Ft
+
+🎁 Első projekthez 10% kedvezmény!`,
+                buttons: [
+                    { text: "💳 Karbantartás", msg: "Milyen a karbantartás?" },
+                    { text: "⏰ Fejlesztési idő", msg: "Mennyi idő alatt készül el?" },
+                    { text: "🎬 Demo kérés", msg: "Kérhetek demót?" },
+                    { text: "📈 ROI", msg: "Mi a megtérülési idő?" }
+                ]
+            },
+            
+            "szolgáltatások": {
+                keywords: ["szolgáltat", "mit", "tud", "képes", "funkció"],
+                response: `🤖 DebreChat Szolgáltatások:
+
+💬 FAQ Chatbot fejlesztés
+🧠 AI-vezérelt ügyfélszolgálat
+📊 Lead generálás és CRM integráció
+🛒 E-commerce chatbot megoldások
+📱 Többplatformos integráció
+
+🎯 Specialitásunk: 24/7 automata ügyfélszolgálat`,
+                buttons: [
+                    { text: "💰 Árak", msg: "Mennyibe kerül?" },
+                    { text: "🔌 Integráció", msg: "Milyen platformokat támogattok?" },
+                    { text: "🎯 Lead", msg: "Hogyan működik a lead gyűjtés?" },
+                    { text: "📞 Kapcsolat", msg: "Debreceni iroda" }
+                ]
+            },
+
+            "idő": {
+                keywords: ["idő", "mikor", "kész", "mennyi", "gyors"],
+                response: `⏰ Fejlesztési időkeretek:
+
+🥉 Alap FAQ Bot: 1-2 hét
+🥈 Professzionális AI: 2-3 hét  
+🥇 Prémium Megoldás: 3-4 hét
+
+🚀 Express opció: +50% áron 50%-kal gyorsabban!`,
+                buttons: [
+                    { text: "🚀 Express", msg: "Express opció részletei" },
+                    { text: "📋 Folyamat", msg: "Hogyan zajlik a fejlesztés?" },
+                    { text: "💰 Árak", msg: "Mennyibe kerül?" },
+                    { text: "📞 Sürgős", msg: "Sürgős projektem van" }
+                ]
+            },
+
+            "demo": {
+                keywords: ["demo", "bemutató", "példa", "teszt"],
+                response: `🎬 Demo és Bemutató:
+
+📅 30 perces ingyenes konzultáció
+🎯 Élő demo az Ön igényeire szabva
+💰 Konkrét ROI számítások
+📋 Azonnali árajánlat
+
+Demo típusok:
+• Éttermi chatbot
+• E-commerce asszisztens  
+• Szolgáltatói bot`,
+                buttons: [
+                    { text: "📅 Időpont", msg: "Időpontot szeretnék foglalni" },
+                    { text: "🍕 Éttermi", msg: "Éttermi chatbot demo" },
+                    { text: "🛒 E-commerce", msg: "Webshop demo" },
+                    { text: "📞 Hívás", msg: "Hívjatok fel" }
+                ]
+            }
+        };
+
+        // ===== TÉMA VÁLTÓ ===== 
+        function toggleTheme() {
+            const body = document.body;
+            const themeButton = document.getElementById('themeToggle');
+            
+            if (currentTheme === 'light') {
+                body.setAttribute('data-theme', 'dark');
+                themeButton.textContent = '☀️';
+                currentTheme = 'dark';
+                sessionStorage.setItem('theme', 'dark');
+            } else {
+                body.removeAttribute('data-theme');
+                themeButton.textContent = '🌙';
+                currentTheme = 'light';
+                sessionStorage.setItem('theme', 'light');
+            }
+        }
+
+        function loadTheme() {
+            const savedTheme = sessionStorage.getItem('theme');
+            if (savedTheme === 'dark') {
+                document.body.setAttribute('data-theme', 'dark');
+                document.getElementById('themeToggle').textContent = '☀️';
+                currentTheme = 'dark';
+            }
+        }
+
+        // ===== CHATBOT FUNKCIÓK GYORSGOMBOKKAL ===== 
+        function toggleChatbot() {
+            const window = document.getElementById('chatbotWindow');
+            chatbotOpen = !chatbotOpen;
+            window.style.display = chatbotOpen ? 'flex' : 'none';
+            
+            if (chatbotOpen) {
+                document.getElementById('userInput').focus();
+            }
+        }
+
+        // Bot válasz keresése
+        function findChatbotResponse(userMessage) {
+            const message = userMessage.toLowerCase().trim();
+            
+            // Üdvözlés
+            const greetings = ["szia", "hello", "helló", "jó napot", "szevasz", "üdv"];
+            if (greetings.some(greeting => message.includes(greeting))) {
+                return {
+                    response: "👋 Szia! Miben segíthetek? Kérdezhetsz árakról, szolgáltatásokról, fejlesztési időről vagy kérhetsz demót!",
+                    buttons: [
+                        { text: "💰 Árak", msg: "Mennyibe kerül?" },
+                        { text: "🤖 Szolgáltatások", msg: "Milyen szolgáltatásokat kínáltok?" },
+                        { text: "⏰ Idő", msg: "Mennyi idő alatt készül el?" },
+                        { text: "🎬 Demo", msg: "Kérhetek demót?" }
+                    ]
+                };
+            }
+
+            // FAQ kategóriák keresése
+            let bestMatch = null;
+            let bestScore = 0;
+
+            for (let category in chatbotResponses) {
+                const keywords = chatbotResponses[category].keywords;
+                let score = 0;
+
+                keywords.forEach(keyword => {
+                    if (message.includes(keyword)) {
+                        score += keyword.length;
+                    }
+                });
+
+                if (score > bestScore) {
+                    bestScore = score;
+                    bestMatch = category;
+                }
+            }
+
+            if (bestMatch && bestScore > 0) {
+                return chatbotResponses[bestMatch];
+            }
+
+            // Fallback válasz
+            return {
+                response: `🤔 Érdekes kérdés! Segítsek ezekben:
+
+💰 Árak és csomagok
+🤖 Szolgáltatások  
+⏰ Fejlesztési idő
+🎬 Demo kérés
+
+Vagy hívj: +36 30 123 4567 📞`,
+                buttons: [
+                    { text: "💰 Árak", msg: "Mennyibe kerül?" },
+                    { text: "🤖 Szolgáltatások", msg: "Milyen szolgáltatásokat kínáltok?" },
+                    { text: "⏰ Idő", msg: "Mennyi idő alatt készül el?" },
+                    { text: "📞 Hívás", msg: "Hívjatok fel" }
+                ]
+            };
+        }
+
+        // Gyorsgombok hozzáadása üzenethez
+        function addQuickButtonsToMessage(messageDiv, buttons) {
+            if (buttons && buttons.length > 0) {
+                const buttonContainer = document.createElement('div');
+                buttonContainer.className = 'quick-buttons';
+                
+                buttons.forEach(button => {
+                    const quickBtn = document.createElement('button');
+                    quickBtn.textContent = button.text;
+                    quickBtn.className = 'quick-btn';
+                    quickBtn.onclick = () => sendQuickMessage(button.msg);
+                    buttonContainer.appendChild(quickBtn);
+                });
+                
+                messageDiv.appendChild(buttonContainer);
+            }
+        }
+
+        // Üzenet hozzáadása
+        function addChatMessage(text, isUser = false, buttons = null) {
+            const messages = document.getElementById('chatMessages');
+            const messageDiv = document.createElement('div');
+            messageDiv.className = `message ${isUser ? 'user-message' : 'bot-message'}`;
+            messageDiv.textContent = text;
+            
+            // Gyorsgombok hozzáadása ha van és bot üzenet
+            if (!isUser && buttons) {
+                addQuickButtonsToMessage(messageDiv, buttons);
+            }
+            
+            messages.appendChild(messageDiv);
+            messages.scrollTop = messages.scrollHeight;
+        }
+
+        // Normál üzenet küldés
+        function sendMessage() {
+            const input = document.getElementById('userInput');
+            const message = input.value.trim();
+            
+            if (!message) return;
+            
+            // Rate limiting
+            if (advancedRateLimit()) {
+                addChatMessage('⚠️ Túl sok üzenet! Várj egy percet.', false);
+                return;
+            }
+            
+            // Input sanitization
+            const sanitized = sanitizeInput(message);
+            const safe = escapeHtml(sanitized);
+            
+            if (!safe.trim()) {
+                addChatMessage('❌ Érvénytelen üzenet.', false);
+                input.value = '';
+                return;
+            }
+            
+            // Felhasználói üzenet
+            addChatMessage(safe, true);
+            input.value = '';
+            messageCount++;
+            
+            // Bot válasz kis késleltetéssel
+            setTimeout(() => {
+                const response = findChatbotResponse(sanitized);
+                addChatMessage(response.response, false, response.buttons);
+            }, 800);
+        }
+
+        // Gyorsüzenet küldés (gombokról)
+        function sendQuickMessage(message) {
+            addChatMessage(message, true);
+            messageCount++;
+            
+            setTimeout(() => {
+                const response = findChatbotResponse(message);
+                addChatMessage(response.response, false, response.buttons);
+            }, 800);
+        }
+
+        // ===== CALENDLY INTEGRÁCIÓ ===== 
+        function openCalendly() {
+            if (window.location.protocol !== 'https:' && window.location.hostname !== 'localhost') {
+                alert('❌ A Calendly csak biztonságos (HTTPS) kapcsolaton működik.');
+                return;
+            }
+            
+            alert('🗓️ Calendly időpontfoglaló\n\nA valós weboldalon itt nyílna meg a Calendly widget.\n\nDemo: hívjon a +36 30 123 4567 számon!');
+        }
+
+        // ===== SMOOTH SCROLL ===== 
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const targetId = this.getAttribute('href');
+                
+                if (!targetId.match(/^#[a-zA-Z][\w:.-]*$/)) {
+                    return;
+                }
+                
+                const target = document.querySelector(targetId);
+                if (target) {
+                    target.scrollIntoView({
+                        behavior: 'smooth',
+                        block: 'start'
+                    });
+                }
+            });
+        });
+
+        // ===== ŰRLAP KEZELÉS ===== 
+        document.getElementById('contactForm').addEventListener('submit', function(e) {
+            e.preventDefault();
+            
+            const formData = new FormData(this);
+            
+            // CSRF ellenőrzés
+            const formToken = formData.get('csrf_token');
+            if (formToken !== csrfToken) {
+                alert('❌ Biztonsági hiba! Töltse újra az oldalt.');
+                return;
+            }
+            
+            // Honeypot ellenőrzés
+            const honeypot = formData.get('website');
+            if (honeypot && honeypot.trim()) {
+                setTimeout(() => {
+                    alert('Köszönjük! Hamarosan jelentkezünk.');
+                    this.reset();
+                }, 2000);
+                return;
+            }
+            
+            // Rate limiting
+            if (advancedRateLimit()) {
+                alert('⚠️ Túl sok kérés! Várjon egy percet.');
+                return;
+            }
+            
+            // Adatok validálása
+            const name = sanitizeInput(formData.get('name'));
+            const email = sanitizeInput(formData.get('email'));
+            const phone = sanitizeInput(formData.get('phone') || '');
+            const company = sanitizeInput(formData.get('company') || '');
+            const message = sanitizeInput(formData.get('message') || '');
+            
+            if (name.length < 2 || name.length > 50) {
+                alert('❌ A név 2-50 karakter között legyen!');
+                return;
+            }
+            
+            if (!validateEmail(email)) {
+                alert('❌ Érvénytelen email cím!');
+                return;
+            }
+            
+            if (phone && !/^[\+]?[0-9\s\-\(\)]{7,15}$/.test(phone)) {
+                alert('❌ Érvénytelen telefonszám!');
+                return;
+            }
+            
+            if (message && message.length > 2000) {
+                alert('❌ Az üzenet túl hosszú (max 2000 karakter)!');
+                return;
+            }
+            
+            // Sikeres feldolgozás
+            const safeName = escapeHtml(name);
+            const safeEmail = escapeHtml(email);
+            
+            alert(`Köszönjük, ${safeName}!\n\n✅ Üzenetét megkaptuk.\n📧 Email: ${safeEmail}\n📞 24 órán belül válaszolunk!\n\nSürgős esetben: +36 30 123 4567`);
+            
+            this.reset();
+            
+            // Token megújítás
+            csrfToken = generateCSRFToken();
+            sessionStorage.setItem('csrfToken', csrfToken);
+            document.getElementById('csrfTokenField').value = csrfToken;
+        });
+
+        // ===== INICIALIZÁLÁS ===== 
+        document.addEventListener('DOMContentLoaded', function() {
+            loadTheme();
+            document.getElementById('csrfTokenField').value = csrfToken;
+            
+            // Enter key a chatbotban
+            document.getElementById('userInput').addEventListener('keypress', function(e) {
+                if (e.key === 'Enter') {
+                    sendMessage();
+                }
+            });
+            
+            // Chatbot pulse animáció
+            setTimeout(() => {
+                const button = document.getElementById('chatbotBtn');
+                if (!chatbotOpen) {
+                    button.style.animation = 'pulse 2s infinite';
+                }
+            }, 3000);
+            
+            console.log('🚀 DebreChat weboldal betöltve - Chatbot gyorsgombokkal!');
+            console.log('💬 Próbáld ki a jobb alsó sarokban lévő chatbotot!');
+        });
+
+        // Session timeout
+        let sessionTimeout;
+        const SESSION_DURATION = 30 * 60 * 1000;
+
+        function resetSessionTimeout() {
+            clearTimeout(sessionTimeout);
+            sessionTimeout = setTimeout(() => {
+                csrfToken = generateCSRFToken();
+                sessionStorage.setItem('csrfToken', csrfToken);
+                
+                const csrfField = document.getElementById('csrfTokenField');
+                if (csrfField) {
+                    csrfField.value = csrfToken;
+                }
+            }, SESSION_DURATION);
+        }
+
+        ['click', 'keypress', 'mousemove', 'scroll'].forEach(eventType => {
+            document.addEventListener(eventType, resetSessionTimeout, { passive: true });
+        });
+
+        resetSessionTimeout();
+
+        // Error handling
+        window.addEventListener('error', function(e) {
+            console.error('JavaScript hiba:', e.message);
+        });
+
+        window.addEventListener('unhandledrejection', function(e) {
+            console.error('Promise rejection:', e.reason);
+            e.preventDefault();
+        });
+    </script>
+</body>
+</html>
